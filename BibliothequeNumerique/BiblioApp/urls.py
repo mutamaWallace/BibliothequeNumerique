@@ -16,16 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.contrib.auth.decorators import login_required
-from django.urls import path, include
-from django.views.generic import TemplateView
+from BiblioApp import views
+from BiblioApp.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('BiblioApp/', include('BiblioApp.urls')),
-    path('BiblioAPI/', include('BiblioAPI.urls')),
-    
-    
-    path(r'^admindash/$', TemplateView.as_view(template_name='frontoffice/master_page.html')),
-   
+    path(r'^$', LoginView.as_view()),
 ]
+

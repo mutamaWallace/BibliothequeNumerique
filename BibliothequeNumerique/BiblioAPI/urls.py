@@ -1,13 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import (
-    EmpruntViewSet, PersonneViewSet, EtudiantViewSet,
-    AuteurViewSet, LivreViewSet, EtrangerViewSet,
-    AbonnementViewSet, EmplacementViewSet, EtagereViewSet,
-    CompartimentViewSet, UniversiteViewSet, CampusViewSet,
-    FaculteViewSet, DepartementViewSet, ClasseViewSet
-)
-
+from BiblioApp.views import LoginView
+from .views import * 
 router = DefaultRouter()
 router.register(r'emprunts', EmpruntViewSet)
 router.register(r'personnes', PersonneViewSet)
@@ -24,7 +18,7 @@ router.register(r'campus', CampusViewSet)
 router.register(r'facultes', FaculteViewSet)
 router.register(r'departements', DepartementViewSet)
 router.register(r'classes', ClasseViewSet)
-
 urlpatterns = [
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
+    path('', LoginView.as_view()),
 ]

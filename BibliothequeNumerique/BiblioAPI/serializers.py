@@ -1,11 +1,5 @@
 from rest_framework import serializers
-from .models import (
-    Emprunt, Personne, Etudiant, Auteur, Livre,
-    Etranger, Abonnement, Emplacement, Etagere,
-    Compartiment, Universite, Campus, Faculte,
-    Departement, Classe
-)
-
+from BiblioAPI.models import *
 class EmpruntSerializer(serializers.ModelSerializer):
     class Meta:
         model = Emprunt

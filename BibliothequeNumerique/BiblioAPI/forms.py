@@ -1,10 +1,5 @@
 from django import forms
-from .models import (
-    Emprunt, Personne, Etudiant, Auteur, Livre,
-    Etranger, Abonnement, Emplacement, Etagere,
-    Compartiment, Universite, Campus, Faculte,
-    Departement, Classe
-)
+from BiblioAPI.models import *
 
 class EmpruntForm(forms.ModelForm):
     class Meta:

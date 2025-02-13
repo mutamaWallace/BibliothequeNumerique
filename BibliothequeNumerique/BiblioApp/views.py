@@ -1,78 +1,34 @@
+from django .shortcuts import render, redirect
+from BiblioApp import *  
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.http import *
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.contrib import messages
+from .forms import *
 
-# Create your views here.
 
-from rest_framework import viewsets
-from .models import (
-    Emprunt, Personne, Etudiant, Auteur, Livre,
-    Etranger, Abonnement, Emplacement, Etagere,
-    Compartiment, Universite, Campus, Faculte,
-    Departement, Classe
-)
-from .serializers import (
-    EmpruntSerializer, PersonneSerializer, EtudiantSerializer, 
-    AuteurSerializer, LivreSerializer, EtrangerSerializer,
-    AbonnementSerializer, EmplacementSerializer, EtagereSerializer,
-    CompartimentSerializer, UniversiteSerializer, CampusSerializer,
-    FaculteSerializer, DepartementSerializer, ClasseSerializer
-)
+def login(request):
+    return render(request, "login2.html")
+class LoginView(TemplateView):
+    
+    template_name = 'login2.html'
+    def post(self, request, **kwargs):
+        username = request.POST.get('username', False)
+        password = request.POST.get('password', False)
+        user = authenticate(username = username, password = password)
+        if user is not None and user.is_active:
+            login(request)
+            return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+        messages.success(request, 'mot de passe ou nom de l''utilisateur incorrect')
+        return render(request, self.template_name)
 
-class EmpruntViewSet(viewsets.ModelViewSet):
-    queryset = Emprunt.objects.all()
-    serializer_class = EmpruntSerializer
+class LogoutView(TemplateView):
+    template_name = 'login2.html'
+    
+    def get(self, request, **kwargs):
+        logout(request)
+        return render(request, self.template_name)
 
-class PersonneViewSet(viewsets.ModelViewSet):
-    queryset = Personne.objects.all()
-    serializer_class = PersonneSerializer
-
-class EtudiantViewSet(viewsets.ModelViewSet):
-    queryset = Etudiant.objects.all()
-    serializer_class = EtudiantSerializer
-
-class AuteurViewSet(viewsets.ModelViewSet):
-    queryset = Auteur.objects.all()
-    serializer_class = AuteurSerializer
-
-class LivreViewSet(viewsets.ModelViewSet):
-    queryset = Livre.objects.all()
-    serializer_class = LivreSerializer
-
-class EtrangerViewSet(viewsets.ModelViewSet):
-    queryset = Etranger.objects.all()
-    serializer_class = EtrangerSerializer
-
-class AbonnementViewSet(viewsets.ModelViewSet):
-    queryset = Abonnement.objects.all()
-    serializer_class = AbonnementSerializer
-
-class EmplacementViewSet(viewsets.ModelViewSet):
-    queryset = Emplacement.objects.all()
-    serializer_class = EmplacementSerializer
-
-class EtagereViewSet(viewsets.ModelViewSet):
-    queryset = Etagere.objects.all()
-    serializer_class = EtagereSerializer
-
-class CompartimentViewSet(viewsets.ModelViewSet):
-    queryset = Compartiment.objects.all()
-    serializer_class = CompartimentSerializer
-
-class UniversiteViewSet(viewsets.ModelViewSet):
-    queryset = Universite.objects.all()
-    serializer_class = UniversiteSerializer
-
-class CampusViewSet(viewsets.ModelViewSet):
-    queryset = Campus.objects.all()
-    serializer_class = CampusSerializer
-
-class FaculteViewSet(viewsets.ModelViewSet):
-    queryset = Faculte.objects.all()
-    serializer_class = FaculteSerializer
-
-class DepartementViewSet(viewsets.ModelViewSet):
-    queryset = Departement.objects.all()
-    serializer_class = DepartementSerializer
-
-class ClasseViewSet(viewsets.ModelViewSet):
-    queryset = Classe.objects.all()
-    serializer_class = ClasseSerializer
+        
