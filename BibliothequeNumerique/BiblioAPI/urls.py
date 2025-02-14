@@ -19,6 +19,6 @@ router.register(r'facultes', FaculteViewSet)
 router.register(r'departements', DepartementViewSet)
 router.register(r'classes', ClasseViewSet)
 urlpatterns = [
-    # path('', include(router.urls)),
+    path('', include(router.urls)),
     path('', LoginView.as_view()),
 ]

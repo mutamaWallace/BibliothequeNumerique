@@ -20,12 +20,13 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('BiblioApp/', include('BiblioApp.urls')),
-    path('BiblioAPI/', include('BiblioAPI.urls')),
-    
-    
-    path(r'^admindash/$', TemplateView.as_view(template_name='frontoffice/master_page.html')),
-   
+    path('', admin.site.urls),
+    path('', include('BiblioApp.urls')),
+    path('', include('BiblioAPI.urls')),
+    path('', TemplateView.as_view(template_name='BiblioApp/templates/Frontend/dashboardPersonnel.html')),  # Page d'accueil
+    path('', TemplateView.as_view(template_name='BiblioApp/templates/login2.html')),  # Page de login
+    path('', TemplateView.as_view(template_name='accounts/profile.html')),
 ]

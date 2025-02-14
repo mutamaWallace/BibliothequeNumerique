@@ -20,6 +20,7 @@ class LoginView(TemplateView):
         user = authenticate(username = username, password = password)
         if user is not None and user.is_active:
             login(request)
+            # return redirect('dashboardPersonnel') 
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
         messages.success(request, 'mot de passe ou nom de l''utilisateur incorrect')
         return render(request, self.template_name)
@@ -30,5 +31,27 @@ class LogoutView(TemplateView):
     def get(self, request, **kwargs):
         logout(request)
         return render(request, self.template_name)
+    
+class DashboardPersonnelView(TemplateView):
+    template_name = 'dashboardPersonnel.html'    # Assure-toi que ce fichier existe dans templates
+    
+    
+# class ProfileView(TemplateView):
+#     template_name = 'profile.html'  # Remplace par le chemin de ton template
 
-        
+def profile_view(request):
+    # Logique pour récupérer les données de profil de l'utilisateur
+    return render(request, 'accounts/profile.html')
+
+
+def ajouter_livre(request):
+    if request.method == 'POST':
+        form = LivreForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  # Enregistrer l'objet Livre dans la base de données
+            return redirect('nom_de_votre_vue_ou_page_de_confirmation')  # Rediriger après le succès
+    else:
+        form = LivreForm()  # Créer une instance vide du formulaire pour GET
+
+    return render(request, 'ajouterLivre.html', {'form': form})
+

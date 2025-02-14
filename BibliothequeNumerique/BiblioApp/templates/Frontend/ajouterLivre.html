@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Livre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Ajouter un Livre</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_titre">Titre</label>
+                {{ form.titre }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_langueLivre">Langue</label>
+                {{ form.langueLivre }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_annee_publication">Année de publication</label>
+                {{ form.annee_publication }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_nombrepages">Nombre de pages</label>
+                {{ form.nombrepages }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_imageLivre">Image du Livre</label>
+                {{ form.imageLivre }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_auteur">Auteur</label>
+                {{ form.auteur }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_id_emplacement">Emplacement</label>
+                {{ form.id_emplacement }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
